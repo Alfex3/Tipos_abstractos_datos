@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Lista</title>
+        <meta charset="utf-8"/> 
+    </head>
+    <body>
+    </body>
+    <script>
+        //https://github.com/Alfex3/Tipos_abstractos_datos
+        function create() {
+            var lista = [];
+            var max = prompt("Escribe el máximo de elementos de la lista");
+        }
+        function isEmpty(list) {
+            return (list.length === 0);
+        }
+        function isFull(list) {
+            return (list.length === max);
+        }
+        function size(list) {
+            return list.length;
+        }
+        function add(list,elem) {
+            list.push(elem);
+            return list.length;
+        }
+        function addAt(list,elem,index) {
+            list.splice(index,0,elem);
+            return list.length;
+        }
+        function get(list,index){
+            return list[index];
+        }
+        function toString(list) {
+            return list.toString().replace(",","-");
+        }
+        function indexOf(list,elem) {
+            return list.indexOf(elem);
+        }
+        function lastIndexOf(list,elem) {
+            return list.lastIndexOf(elem);
+        }
+        function capacity(list) {
+            return max;
+        }
+        function clear(list) {
+            list.length = 0;
+        }
+        function firstElement(list) {
+            return list[0];
+        }
+        function lastElement(list) {
+            return list[list.length - 1];
+        }
+        function remove(list,index) {
+            return list.splice(index,1);
+        }
+        function removeElement(list,elem) {
+            return list.splice(index,list.findIndex(function(e){return e = elem}));
+        }
+        function set(list,elem,index) {
+            return list.splice(index,1,elem);
+        }
+        function test() {
+            create();
+            console.log(isEmpty(lista));
+            console.log(isFull(lista));
+            console.log(size(lista));
+        }
+    </script>
+</html>
