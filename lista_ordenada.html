@@ -25,13 +25,7 @@
             if (isFull(list)) throw "La lista está llena";
             list.push(elem);
             return list.length;
-        }
-        function addAt(list,elem,index) {
-            if (isNaN(elem)) throw "El elemento no es un número";
-            if (isFull(list)) throw "La lista está llena";
-            if (index >= max) throw "El índice está fuera de los límites de la lista";
-            list.splice(index,0,elem);
-            return list.length;
+            list.sort();
         }
         function get(list,index){
             if (index >= max) throw "El índice está fuera de los límites de la lista";
@@ -43,10 +37,6 @@
         function indexOf(list,elem) {
             if (isNaN(elem)) throw "El elemento no es un número";
             return list.indexOf(elem);
-        }
-        function lastIndexOf(list,elem) {
-            if (isNaN(elem)) throw "El elemento no es un número";
-            return list.lastIndexOf(elem);
         }
         function capacity(list) {
             return max;
@@ -77,11 +67,6 @@
                 return true;
             }
         }
-        function set(list,elem,index) {
-            if (index >= max) throw "El índice está fuera de los límites de la lista";
-            if (isNaN(elem)) throw "El elemento no es un número";
-            return list.splice(index,1,elem)[0];
-        }
         function test() {
             create();
             console.log(isEmpty(lista));//true
@@ -90,21 +75,17 @@
             console.log(add(lista,3));//1
             console.log(add(lista,2));//2
             console.log(add(lista,4));//3
-            console.log(add(lista,5));//4
-            console.log(addAt(lista,2,3));//5
+            console.log(add(lista,2));//4
+            console.log(add(lista,5));//5
             console.log(get(lista,3));//2
-            console.log(toString(lista));//3-2-4-2-5
-            console.log(indexOf(lista,2));//1
-            console.log(lastIndexOf(lista,2));//3
-            console.log(firstElement(lista));//3
+            console.log(toString(lista));//2-2-3-4-5
+            console.log(indexOf(lista,2));//0
+            console.log(firstElement(lista));//2
             console.log(lastElement(lista));//5
-            console.log(remove(lista,2));//4
-            console.log(toString(lista));//3-2-2-5
+            console.log(remove(lista,2));//3
+            console.log(toString(lista));//2-2-4-5
             console.log(removeElement(lista,2));//true
-            console.log(toString(lista));//3-2-5
-            console.log(set(lista,1,1));//2
-            console.log(toString(lista));//3-1-5
+            console.log(toString(lista));//2-2-5
         }
-        window.onload = test();
     </script>
 </html>
