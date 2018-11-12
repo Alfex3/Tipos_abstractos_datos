@@ -9,50 +9,85 @@
         //https://github.com/Alfex3/Tipos_abstractos_datos
         function create() {
             lista = [];
-            max = 5;
+            max = 5
+            for (var i = 0; i < max; i++) {
+                lista[i] = NaN;
+            }
         }
         function isEmpty(list) {
-            return (list.length === 0);
+            return isNaN(list[0]);
         }
         function isFull(list) {
-            return (list.length === max);
+            return (!isNaN(list[max - 1]));
         }
         function size(list) {
-            return list.length;
+            var i = 0;
+            while (!isNaN(list[i]) && i !== list.length) {
+                i++
+            }
+            return i;
         }
         function add(list,elem) {
             if (isNaN(elem)) throw "El elemento no es un número";
             if (isFull(list)) throw "La lista está llena";
-            list.push(elem);
-            return list.length;
+            list[size(list)] = elem;
+            return size(list);
         }
         function addAt(list,elem,index) {
             if (isNaN(elem)) throw "El elemento no es un número";
             if (isFull(list)) throw "La lista está llena";
             if (index >= max) throw "El índice está fuera de los límites de la lista";
-            list.splice(index,0,elem);
-            return list.length;
+            for (var i = size(list);i >= index;i--) {
+                list[i+1] = list[i];
+            }
+            list[index] = elem;
+            return size(list);
         }
         function get(list,index){
             if (index >= max) throw "El índice está fuera de los límites de la lista";
             return list[index];
         }
         function toString(list) {
-            return list.toString().replace(/,/g,"-");
+            var str = ""
+            for (i = 0;!isNaN(list[i]) && i !== list.length;i++) {
+                if (i === size(list) - 1) {
+                    str += list[i];
+                }
+                else {
+                    str += list[i] + "-";
+                }
+            }
+            return str;
         }
         function indexOf(list,elem) {
             if (isNaN(elem)) throw "El elemento no es un número";
-            return list.indexOf(elem);
+            for (i = 0;!isNaN(list[i]) && i !== list.length;i++) {
+                if (list[i] === elem) {
+                    return i;
+                }
+            }
+            if (i === size(list)) {
+                return -1
+            }
         }
         function lastIndexOf(list,elem) {
             if (isNaN(elem)) throw "El elemento no es un número";
-            return list.lastIndexOf(elem);
+            for (var i = size(list);i >= 0;i--) {
+                if (list[i] === elem) {
+                    return i;
+                }
+            }
+            if (i === size(list)) {
+                return -1
+            }
         }
         function capacity(list) {
             return max;
         }
         function clear(list) {
-            list.length = 0;
+            for (var i = 0; i < max; i++) {
+                lista[i] = NaN;
+            }
         }
         function firstElement(list) {
             if (isEmpty(list)) throw "La lista está vacía";
@@ -60,27 +95,34 @@
         }
         function lastElement(list) {
             if (isEmpty(list)) throw "La lista está vacía";
-            return list[list.length - 1];
+            return list[size(list) - 1];
         }
         function remove(list,index) {
             if (index >= max) throw "El índice está fuera de los límites de la lista";
-            return list.splice(index,1)[0];
+            var removed = list[index];
+            for (var i = index;i < size(list);i++) {
+                list[i] = list[i+1];
+            }
+            return removed;
         }
         function removeElement(list,elem) {
             if (isNaN(elem)) throw "El elemento no es un número";
-            var index = list.findIndex(function(e){return e === elem});
-            if (index === -1) {
-                return false;
+            for (i = 0;i < size(list);i++) {
+                if (list[i] === elem) {
+                    remove(list,i);
+                    return true;
+                }
             }
-            else {
-                list.splice(index,1);
-                return true;
+            if (i === size(list)) {
+                return false;
             }
         }
         function set(list,elem,index) {
             if (index >= max) throw "El índice está fuera de los límites de la lista";
             if (isNaN(elem)) throw "El elemento no es un número";
-            return list.splice(index,1,elem)[0];
+            var anterior = list[index];
+            list[index] = elem;
+            return anterior;
         }
         function test() {
             create();
